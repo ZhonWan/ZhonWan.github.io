@@ -1,0 +1,1782 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZhonWan - Importaciones Profesionales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* ----------------------------- 
+         1. VARIABLES Y RESET
+        ----------------------------- */
+        :root {
+            /* Paleta de Colores Principal (Tema Oscuro Único) */
+            --red: #D91414;        /* Énfasis, Ofertas, Acciones */
+            --red-dark: #b50000;
+            --blue: #0045A1;       /* Confianza, Enlaces, Acentos */
+            --blue-dark: #00337a;
+            --black: #111111;      /* Fondos principales */
+
+            /* Tonos para el tema */
+            --bg-body: #000000;     /* Fondo principal negro puro para máximo contraste */
+            --text-main: #f0f0f0;   /* Texto principal blanco suave */
+            --bg-light: #1e1e1e;     /* Fondo para secciones secundarias */
+            --bg-section: #1a253a;   /* Fondo de secciones con tinte azulado */
+            --card-bg: #252525;      /* Fondo para tarjetas y elementos elevados */
+            --border: #333333;      /* Color de bordes sutiles */
+            --shadow: rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
+            
+            --container: 1300px;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ----------------------------- 
+         2. COMPONENTES (BOTONES, ETC)
+        ----------------------------- */
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-align: center;
+        }
+
+        .btn-red {
+            background-color: var(--red);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(217, 20, 20, 0.4), 0 0 5px rgba(217, 20, 20, 0.3);
+            /* NUEVO: Animación de resplandor */
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-red::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 5px; height: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            animation: blink 1.5s infinite;
+        }
+        .btn-red:hover { 
+            background-color: var(--red-dark); 
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 20px rgba(217, 20, 20, 0.6), 0 0 15px rgba(217, 20, 20, 0.5);
+        }
+
+        .btn-blue {
+            background-color: var(--blue);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 69, 161, 0.4), 0 0 5px rgba(0, 69, 161, 0.3);
+        }
+        .btn-blue:hover { 
+            background-color: var(--blue-dark); 
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 20px rgba(0, 69, 161, 0.6), 0 0 15px rgba(0, 69, 161, 0.5);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--red);
+            color: #fff;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+            background: transparent;
+        }
+        .btn-outline:hover { background: var(--text-main); color: var(--bg-body); }
+
+        /* ----------------------------- 
+         3. HEADER & NAV
+        ----------------------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /* Efecto Glassmorphism: fondo semitransparente y desenfocado */
+            background-color: rgba(26, 26, 26, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+            box-shadow: 0 2px 10px var(--shadow);
+            transition: padding 0.3s ease, background-color 0.3s ease;
+        }
+
+        .header.scrolled { padding: 8px 30px; }
+
+        .logo img {
+            height: 65px; /* Ajusta según tu logo real */
+            transition: height 0.3s;
+        }
+        .header.scrolled .logo img { height: 40px; }
+
+/* El contenedor del botón (Enlace) */
+/* ---------------------------------------
+   ESTILOS PARA LOS ENLACES (Icono Arriba)
+--------------------------------------- */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacio entre cada opción */
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 15px;
+    transition: transform 0.3s ease, color 0.3s;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+/* ---------------------------------------
+   ESTILO MEJORADO PARA BOTÓN CONTACTAR
+--------------------------------------- */
+.btn-contact {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el icono pequeño y el texto */
+    background: var(--red); /* Rojo ZhonWan */
+    color: white !important;
+    padding: 10px 25px;
+    border-radius: 50px; /* Bordes muy redondos */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 4px 15px rgba(217, 20, 20, 0.4); /* Sombra roja brillante */
+    transition: all 0.3s ease;
+    margin-left: 20px; /* Lo separa un poco del grupo anterior */
+    border: 2px solid #D91414;
+}
+
+/* El icono dentro del botón contactar (debe ser blanco o invertido) */
+.btn-contact img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1); /* Esto vuelve blanca cualquier imagen negra */
+}
+
+/* Efecto Hover del botón Contactar */
+.btn-contact:hover {
+    background: var(--red-dark);
+    color: white !important;
+    transform: translateY(-3px); /* Se eleva */
+    box-shadow: 0 6px 20px rgba(217, 20, 20, 0.6);
+}
+.btn-contact:hover img {
+    filter: brightness(0) invert(1); /* Mantiene el icono blanco */
+}
+
+/* Estilo para el texto */
+.nav-link span {
+    font-size: 14px;        /* Tamaño de la letra */
+    font-weight: 600;
+}
+
+        /* Estilos para la Barra de Búsqueda */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-bg);
+            border-radius: 50px;
+            padding: 5px;
+            border: 1px solid var(--border);
+            margin-left: 20px;
+        }
+        .search-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-main);
+            padding: 5px 15px;
+            font-size: 14px;
+            width: 200px; /* Ancho inicial */
+        }
+        .search-btn {
+            background: var(--blue); width: 30px; height: 30px; border-radius: 50%;
+            border: none; color: #fff; cursor: pointer; display: grid; place-items: center;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--card-bg);
+            color: var(--red); /* Se pone rojo al pasar el mouse */
+            transform: translateY(-3px); /* Pequeña animación hacia arriba */
+        }
+        .nav-link:hover i { color: var(--red); }
+
+        /* Estilo para el icono de usuario en el nav-link */
+        .nav-link .fa-user {
+            margin-right: 8px;
+            font-size: 14px;
+            color: var(--blue);
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover .fa-user {
+            color: var(--red);
+        }
+
+        /* Mobile Menu Trigger (Oculto en PC) */
+        .mobile-toggle { display: none; font-size: 24px; cursor: pointer; margin-left: 15px; z-index: 1100; }
+
+        /* NUEVO: Estilos para el contenedor de acciones del header */
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        /* ----------------------------- 
+         4. HERO SECTION
+        ----------------------------- */
+        .hero {
+            height: 100vh; /* Ocupa toda la altura de la pantalla */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.5));
+            z-index: 1;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #fff; 
+            /* Efecto 3D / Glitch mejorado */
+            text-shadow: 
+                3px 3px 0px rgba(0,0,0,0.7),      /* Sombra dura para profundidad */
+                0 0 20px rgba(217, 20, 20, 0.5),  /* Resplandor rojo */
+                0 0 25px rgba(0, 69, 161, 0.5);   /* Resplandor azul */
+        }
+        
+        .hero-content span { color: var(--red); }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin: 0 auto 40px auto;
+            opacity: 0.8;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        .hero-btns { display: flex; gap: 15px; }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ----------------------------- 
+         5. VENTAJAS (Our Advantage)
+        ----------------------------- */
+        .advantage { padding: 100px 20px; max-width: var(--container); margin: 0 auto; }
+        
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 80px;
+            background: -webkit-linear-gradient(top, #fff, #bbb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-title span { color: var(--blue); border-bottom: 4px solid var(--red); }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+        .feature-row.reverse { flex-direction: row-reverse; }
+
+        .feature-text { flex: 1; }
+        .feature-text h3 { font-size: 32px; margin-bottom: 15px; color: var(--red); }
+        .feature-text p { font-size: 18px; line-height: 1.6; opacity: 0.8; }
+
+        /* NUEVO: Estilo y animación para los iconos de ventajas */
+        .feature-text .icon-wrapper {
+            font-size: 24px;
+            color: var(--blue);
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        .feature-row:hover .icon-wrapper {
+            transform: scale(1.2) rotate(-10deg);
+        }
+
+        .feature-img { flex: 1; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px var(--shadow); }
+        .feature-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .feature-img:hover img { transform: scale(1.05); }
+
+        /* ----------------------------- 
+         6. CATÁLOGO (Cards)
+        ----------------------------- */
+        .catalog { background: var(--bg-section); padding: 100px 20px; }
+
+        /* NUEVO: Filtros del catálogo */
+        .catalog-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid var(--border);
+            background: transparent;
+            color: var(--text-main);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #fff;
+        }
+        
+        .grid-catalog {
+            max-width: var(--container);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        /* ----------------------------- 
+         NUEVO: ESTILOS MEJORADOS PARA TARJETAS DE CATÁLOGO
+        ----------------------------- */
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.2s ease-out;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d; /* Habilita el 3D */
+            will-change: transform; /* Optimización para la animación */
+        }
+        
+        /* Efecto de brillo que sigue al mouse */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 2;
+        }
+        .card:hover::before {
+            opacity: 1;
+        }
+        
+        .card:hover {
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border-color: #555;
+        }
+
+        .card.hide {
+            transform: scale(0) !important; /* Asegura que el filtro funcione sobre el 3D */
+            opacity: 0;
+            padding: 0;
+            margin: -15px; /* Para colapsar el espacio */
+        }
+
+        .card img {
+            height: 200px;
+            width: 100%;
+            object-fit: contain;
+            padding: 20px;
+            transition: transform 0.4s ease;
+            z-index: 1;
+        }
+        .card:hover img {
+            transform: translateZ(40px) scale(1.05); /* Eleva la imagen en 3D */
+        }
+
+        .card-content {
+            padding: 0 20px 20px;
+            transform: translateZ(20px); /* Eleva el contenido */
+            transition: transform 0.4s ease;
+        }
+        .card:hover .card-content {
+            transform: translateZ(50px);
+        }
+
+        .card h3 { 
+            font-size: 22px; 
+            margin-bottom: 10px; 
+            transition: color 0.3s ease; 
+            color: var(--text-main);
+        }
+        .card:hover h3 { color: var(--blue); }
+
+        .card p { font-size: 14px; opacity: 0.7; margin-bottom: 20px; }
+
+        .card .btn {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s 0.1s ease, transform 0.4s 0.1s ease;
+        }
+        .card:hover .btn { opacity: 1; transform: translateY(0); }
+
+        /* ----------------------------- 
+         NUEVO: SECCIÓN DE LOGOS/ANUNCIOS DESPLAZABLES
+        ----------------------------- */
+        .scrolling-logos-section {
+            padding: 40px 0;
+            background: var(--black);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .scrolling-logos {
+            display: flex;
+            width: 200%; /* El contenedor padre es el doble de ancho que cada track */
+            animation: scroll 30s linear infinite;
+        }
+        .scrolling-logos:hover {
+            animation-play-state: paused;
+        }
+        .scrolling-logos-track {
+            width: 100%; /* Cada track ocupa la mitad del espacio del padre */
+            display: flex;
+            align-items: center;
+            justify-content: space-around; /* Distribuye los logos uniformemente */
+        }
+        .scrolling-logos-track img {
+            height: 50px;
+            margin: 0 40px;
+            filter: grayscale(100%) brightness(2);
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+        .scrolling-logos-track img:hover {
+            filter: grayscale(0) brightness(1);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* ----------------------------- 
+         7. OFERTAS HOT (Timer)
+        ----------------------------- */
+        .deals { 
+            padding: 120px 20px 100px 20px; 
+            max-width: var(--container); 
+            margin: 0 auto; 
+            background: var(--black);
+            min-height: 100vh;
+        }
+        
+        .deals-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 50px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .timer-wrapper {
+            background: var(--black);
+            padding: 10px 25px;
+            border-radius: 10px;
+            color: #fff;
+        }
+        .timer-wrapper h4 { font-size: 12px; text-transform: uppercase; color: #aaa; letter-spacing: 1px; }
+        
+        .timer { display: flex; gap: 15px; margin-top: 5px; }
+        .timer-unit span { font-size: 32px; font-weight: 900; color: var(--red); line-height: 1; }
+        .timer-unit label { font-size: 10px; display: block; text-align: center; color: #fff; }
+
+        .grid-deals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .deal-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            padding: 2px; /* Espacio para el borde gradiente */
+            transition: all 0.4s ease;
+        }
+
+        .deal-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--red), var(--blue));
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .deal-card:hover::before {
+            opacity: 1;
+        }
+
+        .deal-card-inner {
+            background: #1a1a1a;
+            width: 100%; height: 100%;
+            border-radius: 13px; /* Un poco menos que el contenedor */
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s ease;
+        }
+
+        .deal-img-box {
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .deal-img-box img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        /* Efecto Cambio de Imagen */
+        .img-back { opacity: 0; z-index: 2; }
+        .deal-card:hover .img-back { opacity: 1; }
+
+        .deal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .deal-card:hover .deal-card-inner {
+            background: #222;
+        }
+
+        .deal-info { padding-top: 15px; flex-grow: 1; display: flex; flex-direction: column; }
+        .deal-info h3 { font-size: 18px; margin-bottom: 10px; color: #fff; font-weight: 600; }
+        .price { font-size: 24px; font-weight: 900; color: var(--red); margin-bottom: 15px; }
+        .old-price { font-size: 14px; text-decoration: line-through; color: #999; margin-left: 10px; }
+
+        .badge-hot {
+            position: absolute; top: 10px; left: 10px;
+            background: var(--red); color: #fff;
+            padding: 5px 10px; font-size: 12px; font-weight: 700;
+            border-radius: 4px; z-index: 5;
+        }
+
+        /* ----------------------------- 
+         8. CLIENTES & PAGOS
+        ----------------------------- */
+        .pay-logos { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .pay-logo {
+            height: 40px; background: #fff; padding: 5px 15px; border-radius: 5px;
+            filter: grayscale(100%); opacity: 0.6; transition: 0.3s;
+        }
+        .pay-logo:hover { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
+
+        .trust { background: var(--bg-section); padding: 80px 20px; text-align: center; }
+        
+        .testimonial {
+            max-width: 800px; margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            position: relative;
+        }
+        .testimonial i { font-size: 40px; color: var(--blue); margin-bottom: 20px; }
+        .testimonial p { font-size: 20px; font-style: italic; margin-bottom: 20px; }
+        .testimonial h5 { font-weight: 800; color: var(--text-main); }
+
+        /* ----------------------------- 
+         NUEVO: SECCIÓN FAQ
+        ----------------------------- */
+        .faq-section {
+            padding: 100px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--blue);
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        .faq-question:hover { background: #333; }
+        .faq-question::after {
+            content: '\f078'; /* Icono de flecha hacia abajo de FontAwesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.4s ease;
+        }
+        .faq-item.active .faq-question::after { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+        }
+        /* ----------------------------- 
+         9. CONTACTO
+        ----------------------------- */
+        .contact { padding: 100px 20px; background: var(--black); color: #fff; }
+        .contact-container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; }
+        
+        .contact-info h2 { font-size: 40px; color: var(--red); margin-bottom: 20px; }
+        .contact-info p { opacity: 0.7; margin-bottom: 30px; font-size: 18px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 18px; }
+        .contact-item i { color: var(--blue); }
+        
+        .contact-form { display: grid; gap: 20px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 15px; background: #222; border: 1px solid #444;
+            color: #fff; border-radius: 8px; font-size: 16px; outline: none;
+        }
+        .form-group input:focus { border-color: var(--red); }
+        .full-width { grid-column: 1 / -1; }
+
+        /* ----------------------------- 
+         10. FOOTER
+        ----------------------------- */
+        footer { background: #0a0a0a; color: #888; padding: 60px 20px 20px; border-top: 1px solid #222; }
+        .footer-grid {
+            max-width: var(--container); margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 { color: #fff; margin-bottom: 20px; font-size: 18px; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a:hover { color: var(--blue); }
+        .copyright { text-align: center; border-top: 1px solid #222; padding-top: 20px; font-size: 14px; }
+
+        /* NUEVO: Estilos mejorados para iconos sociales del footer */
+        .socials {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .socials a {
+            font-size: 22px;
+            color: #888; /* Color gris por defecto */
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .socials a:hover {
+            transform: scale(1.2); /* Se agranda al pasar el cursor */
+        }
+        /* Colores específicos para cada red social en hover */
+        .socials a.facebook:hover { color: #1877F2; }
+        .socials a.instagram:hover { color: #E4405F; }
+        .socials a.tiktok:hover { color: #fff; } /* TikTok se ve mejor en blanco o negro */
+        .socials a.whatsapp:hover { color: #25D366; }
+
+        /* -----------------------------
+         NUEVO: BOTÓN FLOTANTE DE REDES SOCIALES
+        ----------------------------- */
+        .floating-menu-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1010; /* Por encima de otros elementos */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* NUEVO: Animación de pulso para llamar la atención */
+        .main-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--red);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(217, 20, 20, 0.5);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.3s ease;
+            z-index: 2; /* Encima de los botones sociales */
+            animation: pulse-red 2.5s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+
+        .main-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(217, 20, 20, 0.7);
+        }
+
+        .main-btn i {
+            font-size: 24px;
+            color: white;
+            transition: transform 0.4s ease;
+        }
+
+        .floating-menu-container.active .main-btn i {
+            transform: rotate(135deg); /* Rota el '+' a una 'x' */
+        }
+
+        .social-btn {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            opacity: 0;
+            transform: scale(0);
+            z-index: 1;
+        }
+
+        .floating-menu-container.active .social-btn {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Posicionamiento en semicírculo para PC */
+        .floating-menu-container.active .social-btn.whatsapp { transform: translate(calc(var(--x-offset, -80px)), calc(var(--y-offset, -20px))); transition-delay: 0.05s; background: #25D366; }
+        .floating-menu-container.active .social-btn.instagram { transform: translate(calc(var(--x-offset, -65px)), calc(var(--y-offset, -75px))); transition-delay: 0.1s; background: #E4405F; }
+        .floating-menu-container.active .social-btn.tiktok { transform: translate(calc(var(--x-offset, 0px)), calc(var(--y-offset, -90px))); transition-delay: 0.15s; background: #111; border: 1px solid #fff; }
+        .floating-menu-container.active .social-btn.facebook { transform: translate(calc(var(--x-offset, 65px)), calc(var(--y-offset, -75px))); transition-delay: 0.2s; background: #1877F2; }
+
+        .social-btn:hover {
+            transform: scale(1.2) !important; /* Asegura que el hover funcione sobre el transform del active */
+        }
+
+ 
+
+
+
+        /* ----------------------------- 
+         11. ANIMACIONES (Scroll Reveal)
+        ----------------------------- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+
+        /* ----------------------------- 
+         12. RESPONSIVE
+        ----------------------------- */
+        /* Tablets y dispositivos más pequeños */
+        @media (max-width: 1024px) {
+            .header { padding: 15px 20px; }
+            .header.scrolled { padding: 8px 20px; }
+
+            /* --- Menú de Hamburguesa --- */
+            .nav {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Empieza oculto fuera de la pantalla */
+                width: 300px;
+                height: 100vh;
+                background-color: #1a1a1a;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 25px;
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+                z-index: 1050;
+            }
+            .nav.active {
+                right: 0; /* Lo hace visible */
+            }
+            .nav-link { font-size: 18px; padding: 10px 20px; }
+            .btn-contact { margin-left: 0; }
+            .search-bar { display: none; } /* Ocultar barra de búsqueda en menú hamburguesa */
+            .mobile-toggle { display: block; }
+            /* --------------------------- */
+
+            .feature-row { flex-direction: column; text-align: center; }
+            .feature-row.reverse { flex-direction: column; }
+            .grid-deals { grid-template-columns: repeat(2, 1fr); }
+            .contact-container { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        
+        /* Móviles */
+        @media (max-width: 768px) {
+            .section-title { font-size: 32px; margin-bottom: 60px; }
+
+            .deals-top h2 { font-size: 36px !important; }
+            .deals-top { flex-direction: column; align-items: center; text-align: center; }
+            
+            .grid-deals { grid-template-columns: 1fr; }
+            
+            .hero-content h1 { font-size: 48px; }
+            .hero-content p { font-size: 16px; }
+
+            .feature-text h3 { font-size: 26px; }
+            .feature-text p { font-size: 16px; }
+
+            .contact-info h2 { font-size: 32px; }
+            .contact-info p { font-size: 16px; }
+            
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .socials { justify-content: center; }
+
+            /* Posicionamiento vertical para móvil */
+            .floating-menu-container.active .social-btn.whatsapp { transform: translateY(-70px); transition-delay: 0.05s; }
+            .floating-menu-container.active .social-btn.instagram { transform: translateY(-130px); transition-delay: 0.1s; }
+            .floating-menu-container.active .social-btn.tiktok { transform: translateY(-190px); transition-delay: 0.15s; }
+            .floating-menu-container.active .social-btn.facebook { transform: translateY(-250px); transition-delay: 0.2s; }
+
+            .social-btn:hover {
+                transform: scale(1.1) !important; /* Ajuste para móvil */
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+        @keyframes blink {
+            0%, 100% { box-shadow: 0 0 5px rgba(217, 20, 20, 0.2); }
+            50% { box-shadow: 0 0 20px 10px rgba(217, 20, 20, 0.6); }
+        }
+        /* NUEVO: Animación de pulso para el botón flotante */
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 5px 20px rgba(217, 20, 20, 0.5); transform: scale(1); }
+            50% { box-shadow: 0 8px 30px rgba(217, 20, 20, 0.7); transform: scale(1.05); }
+        }
+
+        @keyframes blink-original {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+    <header class="header">
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/user-attachments/assets/571217a8-20a9-418b-8217-911a38995c65" alt="ZhonWan Logo" >
+        </div>
+
+        <nav class="nav">
+            <a href="#catalogo" class="nav-link">
+                <span>Catálogo</span>
+            </a>
+
+            <a href="#ventajas" class="nav-link">
+                <span>Ventajas</span>
+            </a>
+            <a href="#deals" class="nav-link">
+                <span>Ofertas</span>
+            </a>
+            <a href="#clientes" class="nav-link">
+                <span>Clientes</span>
+            </a>
+        </nav>
+
+        <div class="header-actions">
+            <!-- Barra de Búsqueda -->
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Buscar productos...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+
+            <a href="login.html" class="nav-link">
+                <i class="fas fa-user"></i>
+                <span>Iniciar Sesión</span>
+            </a>
+
+            <a href="#contacto" class="btn-contact">
+                <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Teléfono">
+                <span>Contactar</span>
+            </a>
+            <div class="mobile-toggle" id="mobile-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN DE OFERTAS (AHORA AL PRINCIPIO) -->
+    <section class="deals" id="deals">
+        <div class="deals-top reveal">
+            <div>
+                <h2 style="font-size: 48px; font-weight: 900; line-height: 1.1;">OFERTAS <span style="color:var(--red)">HOT</span> 🔥</h2>
+                <p style="font-size: 18px; opacity: 0.8;">Precios de locura por tiempo limitado.</p>
+            </div>
+            <div class="timer-wrapper">
+                <h4>Termina en:</h4>
+                <div class="timer" id="countdown">
+                    <div class="timer-unit"><span id="days">00</span><label>Días</label></div>
+                    <div class="timer-unit"><span id="hours">00</span><label>Horas</label></div>
+                    <div class="timer-unit"><span id="minutes">00</span><label>Min</label></div>
+                    <div class="timer-unit"><span id="seconds">00</span><label>Seg</label></div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-deals">
+            <div class="deal-card reveal">
+                <div class="deal-card-inner">
+                    <div class="badge-hot">-20%</div>
+                    <div class="deal-img-box">
+                        <img src="https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-front">
+                        <img src="https://images.pexels.com/photos/834914/pexels-photo-834914.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-back">
+                    </div>
+                    <div class="deal-info">
+                        <h3>Engrapadora TRUPER T-50</h3>
+                        <div class="price">$45.00 <span class="old-price">$56.00</span></div>
+                        <a href="product-detail.html" class="btn btn-red" style="width:100%; margin-top:auto; font-size:14px; padding:12px;">Comprar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="deal-card reveal">
+                <div class="deal-card-inner">
+                    <div class="badge-hot">-15%</div>
+                    <div class="deal-img-box">
+                        <img src="https://images.pexels.com/photos/1299461/pexels-photo-1299461.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-front">
+                        <img src="https://images.pexels.com/photos/209235/pexels-photo-209235.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-back">
+                    </div>
+                    <div class="deal-info">
+                        <h3>Caja Bisagras Reforzadas</h3>
+                        <div class="price">$25.00 <span class="old-price">$30.00</span></div>
+                        <a href="product-detail.html" class="btn btn-red" style="width:100%; margin-top:auto; font-size:14px; padding:12px;">Comprar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="deal-card reveal">
+                <div class="deal-card-inner">
+                    <div class="badge-hot">-30%</div>
+                    <div class="deal-img-box">
+                        <img src="https://images.pexels.com/photos/7706443/pexels-photo-7706443.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-front">
+                        <img src="https://images.pexels.com/photos/7706442/pexels-photo-7706442.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-back">
+                    </div>
+                    <div class="deal-info">
+                        <h3>Super Glue (Caja Master)</h3>
+                        <div class="price">$80.00 <span class="old-price">$115.00</span></div>
+                        <a href="product-detail.html" class="btn btn-red" style="width:100%; margin-top:auto; font-size:14px; padding:12px;">Comprar</a>
+                    </div>
+                </div>
+            </div>
+            <!-- NUEVO: Cuarta tarjeta de oferta -->
+            <div class="deal-card reveal">
+                <div class="deal-card-inner">
+                    <div class="badge-hot">-25%</div>
+                    <div class="deal-img-box">
+                        <img src="https://images.pexels.com/photos/4475523/pexels-photo-4475523.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-front">
+                        <img src="https://images.pexels.com/photos/4475524/pexels-photo-4475524.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-back">
+                    </div>
+                    <div class="deal-info">
+                        <h3>Roll Screen Premium (Unidad)</h3>
+                        <div class="price">$90.00 <span class="old-price">$120.00</span></div>
+                        <a href="product-detail.html" class="btn btn-red" style="width:100%; margin-top:auto; font-size:14px; padding:12px;">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE PORTADA (HERO) -->
+    <section class="hero">
+        <div class="hero-slider" id="hero-slider"></div>
+        <div class="hero-content reveal">
+            <h1>IMPORTAMOS LA <span>FUERZA</span> PARA TUS PROYECTOS</h1>
+            <p>Especialistas en Madera <strong>PINO</strong>, Herramientas <strong>TRUPER</strong>, Paneles <strong>CELTEX</strong> y Materiales Publicitarios. Calidad Premium garantizada.</p>
+            <div class="hero-btns">
+                <a href="#catalogo" class="btn btn-red">Ver Catálogo</a>
+                <a href="#contacto" class="btn btn-outline">Cotizar Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE VENTAJAS -->
+    <section class="advantage" id="ventajas">
+        <div class="section-title reveal">
+            <h2>Nuestra <span>Ventaja</span></h2>
+        </div>
+        <div class="feature-row reveal">
+            <div class="feature-text">
+                <h3><i class="fas fa-check-circle icon-wrapper"></i> CALIDAD INSUPERABLE</h3>
+                <p>En ZhonWan, importamos directamente madera PINO seleccionada y herramientas TRUPER originales. Garantizamos durabilidad en cada pieza para que tus estructuras resistan el paso del tiempo.</p>
+            </div>
+            <div class="feature-img">
+                <img src="https://images.unsplash.com/photo-1605218427306-633ba309375d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Calidad Madera">
+            </div>
+        </div>
+        <div class="feature-row reverse reveal">
+            <div class="feature-text">
+                <h3><i class="fas fa-lightbulb icon-wrapper"></i> CREATIVIDAD Y MATERIALES</h3>
+                <p>Ofrecemos soluciones modernas como CELTEX BOARD, FOAM BOARD y ROLL SCREEN. Ideal para acabados publicitarios, diseño de interiores y gigantografías de alto impacto.</p>
+            </div>
+            <div class="feature-img">
+                <img src="https://images.unsplash.com/photo-1621905251189-fc0153077430?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Materiales Creativos">
+            </div>
+        </div>
+        <div class="feature-row reveal">
+            <div class="feature-text">
+                <h3><i class="fas fa-boxes icon-wrapper"></i> SUMINISTRO CONSTANTE</h3>
+                <p>Nunca detengas tu obra. Contamos con stock permanente de Bisagras, Paletas SOMITAPE, Grapas y Adhesivos Super Glue. Venta al por mayor y menor.</p>
+            </div>
+            <div class="feature-img">
+                <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Stock Almacén">
+            </div>
+        </div>
+    </section>
+
+    <section class="catalog" id="catalogo">
+        <div class="section-title reveal">
+            <h2>Catálogo <span>Destacado</span></h2>
+        </div>
+
+        <!-- NUEVO: Filtros del Catálogo -->
+        <div class="catalog-filters reveal">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="madera">Madera</button>
+            <button class="filter-btn" data-filter="herramientas">Herramientas</button>
+            <button class="filter-btn" data-filter="paneles">Paneles</button>
+            <button class="filter-btn" data-filter="insumos">Insumos</button>
+        </div>
+        
+        <div class="grid-catalog">
+            <div class="card reveal" data-category="madera">
+                <img src="https://images.pexels.com/photos/129733/pexels-photo-129733.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Madera Pino" class="card-img">
+                <div class="card-content">
+                    <h3>Madera PINO</h3>
+                    <p>Listones y tablas cepilladas de primera calidad para estructuras.</p>
+                    <a href="#contacto" class="btn btn-blue">Cotizar</a>
+                </div>
+            </div>
+            <div class="card reveal" data-category="herramientas">
+                <img src="https://images.pexels.com/photos/175039/pexels-photo-175039.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Truper" class="card-img">
+                <div class="card-content">
+                    <h3>Herramientas TRUPER</h3>
+                    <p>Engrapadoras, martillos y equipo de seguridad industrial.</p>
+                    <a href="#contacto" class="btn btn-blue">Cotizar</a>
+                </div>
+            </div>
+            <div class="card reveal" data-category="paneles">
+                <img src="https://images.pexels.com/photos/961402/pexels-photo-961402.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Celtex" class="card-img">
+                <div class="card-content">
+                    <h3>Paneles CELTEX</h3>
+                    <p>Foam board y materiales rígidos para publicidad y maquetas.</p>
+                    <a href="#contacto" class="btn btn-blue">Cotizar</a>
+                </div>
+            </div>
+            <div class="card reveal" data-category="insumos">
+                <img src="https://images.pexels.com/photos/8005396/pexels-photo-8005396.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Adhesivos" class="card-img">
+                <div class="card-content">
+                    <h3>Insumos Varios</h3>
+                    <p>Somitape, Super Glue, Bisagras y Tubos de acabado.</p>
+                    <a href="#contacto" class="btn btn-blue">Cotizar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust" id="clientes">
+        <div class="testimonial reveal">
+            <i class="fas fa-quote-left"></i>
+            <p>"La calidad de la madera Pino de ZhonWan es superior a lo que encontramos en el mercado local. Además, la entrega en Lima fue puntual y el trato excelente."</p>
+            <h5>— Carlos Mendoza, Constructora Edifica</h5>
+        </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN: Preguntas Frecuentes (FAQ) -->
+    <section class="faq-section" id="faq">
+        <div class="section-title reveal">
+            <h2>Preguntas <span>Frecuentes</span></h2>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">¿Realizan envíos a provincia?</div>
+            <div class="faq-answer">
+                <p style="padding: 0 20px 20px; line-height: 1.6; opacity: 0.8;">Sí, realizamos envíos a todo el Perú. Dejamos la mercadería en la agencia de transportes de su preferencia en Lima. El costo del flete es asumido por el cliente.</p>
+            </div>
+        </div>
+        <div class="faq-item reveal">
+            <div class="faq-question">¿Cuáles son los métodos de pago aceptados?</div>
+            <div class="faq-answer">
+                <p style="padding: 0 20px 20px; line-height: 1.6; opacity: 0.8;">Aceptamos transferencias bancarias (BCP, Interbank), Yape, Plin y todas las tarjetas de crédito/débito a través de un link de pago seguro.</p>
+            </div>
+        </div>
+        <div class="faq-item reveal">
+            <div class="faq-question">¿Venden al por mayor y menor?</div>
+            <div class="faq-answer">
+                <p style="padding: 0 20px 20px; line-height: 1.6; opacity: 0.8;">¡Claro! Atendemos tanto a clientes minoristas que buscan unidades como a grandes empresas que requieren volumen. Contáctanos para una cotización personalizada según tu necesidad.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- NUEVA SECCIÓN: Logos/Anuncios Desplazables -->
+    <section class="scrolling-logos-section">
+        <div class="scrolling-logos">
+            <!-- Duplicamos el track para un bucle infinito y suave -->
+            <div class="scrolling-logos-track">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_logo.svg" alt="Microsoft">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+            </div>
+            <div class="scrolling-logos-track">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_logo.svg" alt="Microsoft">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contacto">
+        <div class="contact-container">
+            <div class="contact-info reveal">
+                <h2>Contáctanos</h2>
+                <p>Estamos listos para abastecer tu proyecto. Escríbenos y recibe una cotización formal en minutos.</p>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+51 999 999 999</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>ventas@zhonwan.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Av. Los Constructores 123, Lima</span>
+                </div>
+            </div>
+
+            <form class="contact-form reveal">
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre Completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Teléfono / Celular" required>
+                </div>
+                <div class="form-group full-width">
+                    <select>
+                        <option>Selecciona Producto de Interés</option>
+                        <option>Madera Pino</option>
+                        <option>Herramientas</option>
+                        <option>Paneles / Publicidad</option>
+                        <option>Otros</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <textarea rows="4" placeholder="Detalles de tu pedido..."></textarea>
+                </div>
+                <div class="full-width">
+                    <button type="submit" class="btn btn-red" style="width:100%">Enviar Mensaje</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 20px;">
+                     <img src="https://raw.githubusercontent.com/user-attachments/assets/571217a8-20a9-418b-8217-911a38995c65" alt="ZhonWan">
+                </div>
+                <p style="font-size: 14px; line-height: 1.6;">Importadora líder en soluciones constructivas y publicitarias. Calidad, precio y garantía.</p>
+                <!-- Iconos sociales restaurados -->
+                <div class="socials">
+                    <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="tiktok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/51999999999" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Empresa</h4>
+                <ul>
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Catálogo PDF</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Ayuda</h4>
+                <ul>
+                    <li><a href="#">Envíos</a></li>
+                    <li><a href="#">Devoluciones</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Horario</h4>
+                <ul style="font-size: 14px;">
+                    <li>Lun - Vie: 8:00am - 6:00pm</li>
+                    <li>Sábados: 9:00am - 1:00pm</li>
+                    <li style="color: var(--red);">Domingos: Cerrado</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 ZhonWan Importaciones. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- NUEVO: BOTÓN FLOTANTE DE REDES SOCIALES -->
+    <div class="floating-menu-container" id="floating-menu-container">
+        <a href="https://wa.me/51999999999" target="_blank" class="social-btn whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="#" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-btn tiktok"><i class="fab fa-tiktok"></i></a>
+        <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+
+        <button class="main-btn" id="main-btn">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+
+    <script>
+        // 1. Script para el contador de OFERTAS
+        // Usamos una función IIFE para evitar conflictos con variables globales.
+        (function() {
+            // Aseguramos que no haya conflictos con intervalos previos.
+            if (window.countdownInterval) clearInterval(window.countdownInterval);
+
+            window.countdownInterval = setInterval(() => {
+                const now = new Date().getTime();
+                
+                // --- CONFIGURACIÓN DE LA HORA OBJETIVO: 3:00 AM (03:00) ---
+                const targetDate = new Date();
+                // CAMBIA ESTA LÍNEA: (3 es la hora, 0 es el minuto)
+                targetDate.setHours(3, 0, 0, 0); 
+                const distance = targetDate.getTime() - now;
+
+                // Elemento DOM para el contenedor
+                const countdownEl = document.getElementById("countdown");
+
+                // 1. Finalizado
+                if (distance < 0) {
+                    clearInterval(window.countdownInterval);
+                    if (countdownEl) {
+                        countdownEl.innerHTML = 
+                            "<div style='font-size: 20px; font-weight: 800; color: var(--red); padding: 10px;'>¡OFERTA FINALIZADA!</div>";
+                    }
+                    return;
+                }
+
+                // 2. Cálculos y Display
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Actualizar HTML solo si el elemento existe
+                if (countdownEl) {
+                    document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+                    document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+                    document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+                    document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+                }
+
+            }, 1000);
+        })();
+
+        // 2. Script para el efecto de scroll (Scroll Reveal & Header Shrink)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            reveals.forEach((element, i) => {
+                var windowHeight = window.innerHeight;
+                var revealTop = element.getBoundingClientRect().top;
+                var revealPoint = 150;
+
+                if (revealTop < windowHeight - revealPoint) {
+                    // Efecto Stagger (cascada)
+                    // Usamos el data-attribute para asegurarnos que la animación solo se añade una vez
+                    if (!element.hasAttribute('data-revealed')) {
+                        let delay = element.dataset.delay || 0;
+                        setTimeout(() => {
+                            element.classList.add("active");
+                        }, delay);
+                        element.setAttribute('data-revealed', 'true');
+                    }
+                } else {
+                    // Opcional: si quieres que la animación se repita al scrollear hacia arriba
+                    // element.classList.remove("active");
+                    // element.removeAttribute('data-revealed');
+                }
+            });
+        }
+
+        window.addEventListener("scroll", reveal);
+
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector('.header');
+            header.classList.toggle('scrolled', window.scrollY > 0);
+        });
+        // Llamar a reveal al cargar la página para que se vean los primeros elementos
+        reveal();
+
+        // Asignar delays para el efecto stagger en las tarjetas
+        document.addEventListener('DOMContentLoaded', () => {
+            const dealCards = document.querySelectorAll('.grid-deals .deal-card');
+            const catalogCards = document.querySelectorAll('.grid-catalog .card');
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            function setStaggerDelay(elements, delay = 100) {
+                elements.forEach((el, index) => {
+                    el.dataset.delay = index * delay;
+                });
+            }
+
+            setStaggerDelay(dealCards);
+            setStaggerDelay(catalogCards);
+            setStaggerDelay(faqItems, 50);
+        });
+
+        // UNIFICADO: Todos los scripts que se ejecutan al cargar el DOM
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- 3. Lógica para el Menú Móvil ---
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const nav = document.querySelector('.nav');
+            const navLinks = document.querySelectorAll('.nav-link, .btn-contact');
+
+            if (mobileToggle && nav) {
+                mobileToggle.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    const icon = mobileToggle.querySelector('i');
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                });
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (nav.classList.contains('active')) {
+                            mobileToggle.click();
+                        }
+                    });
+                });
+            }
+
+            // --- 5. Lógica para el carrusel de la portada (Hero Slider) ---
+            const sliderContainer = document.getElementById('hero-slider');
+            if (sliderContainer) {
+                const images = [
+                    'https://images.unsplash.com/photo-1581092916376-02393314af95?auto=format&fit=crop&w=1770&q=80',
+                    'https://images.unsplash.com/photo-1621905251189-fc0153077430?auto=format&fit=crop&w=1770&q=80',
+                    'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1770&q=80',
+                    'https://images.pexels.com/photos/175039/pexels-photo-175039.jpeg?auto=format&fit=crop&w=1770&q=80'
+                ];
+
+                images.forEach((imgUrl, index) => {
+                    const slide = document.createElement('div');
+                    slide.classList.add('hero-slide');
+                    slide.style.backgroundImage = `url('${imgUrl}')`;
+                    if (index === 0) slide.classList.add('active');
+                    sliderContainer.appendChild(slide);
+                });
+
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.hero-slide');
+                if (slides.length > 1) {
+                    setInterval(() => {
+                        slides[currentSlide].classList.remove('active');
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        slides[currentSlide].classList.add('active');
+                    }, 5000);
+                }
+            }
+
+            // --- Lógica para el Filtro del Catálogo ---
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const catalogCards = document.querySelectorAll('.grid-catalog .card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const filter = button.dataset.filter;
+
+                    catalogCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.classList.remove('hide');
+                        } else {
+                            card.classList.add('hide');
+                        }
+                    });
+                });
+            });
+
+            // --- Lógica para el Acordeón de FAQ ---
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const answer = item.querySelector('.faq-answer');
+                    const isActive = item.classList.toggle('active');
+
+                    answer.style.maxHeight = isActive ? answer.scrollHeight + "px" : null;
+                    answer.style.padding = isActive ? "0 20px 20px" : "0 20px";
+                });
+            });
+
+            // --- Lógica para el Botón Flotante de Redes Sociales ---
+            const floatingMenu = document.getElementById('floating-menu-container');
+            const mainBtn = document.getElementById('main-btn');
+            if (mainBtn) {
+                mainBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    floatingMenu.classList.toggle('active');
+
+                    // NUEVO: Lógica para evitar que el menú se salga de la pantalla
+                    const menuRect = mainBtn.getBoundingClientRect();
+                    const spaceAbove = menuRect.top;
+                    const requiredSpace = 150; // Espacio aproximado que ocupa el menú desplegado
+
+                    if (spaceAbove < requiredSpace) {
+                        // Si no hay espacio arriba, invierte la dirección del despliegue
+                        floatingMenu.style.setProperty('--y-offset', '90px'); // Hacia abajo
+                    } else {
+                        // Resetea a la posición normal (hacia arriba)
+                        floatingMenu.style.removeProperty('--y-offset');
+                    }
+                });
+            }
+            // Cierra el menú si se hace clic fuera de él
+            document.addEventListener('click', (e) => {
+                if (floatingMenu && floatingMenu.classList.contains('active') && !floatingMenu.contains(e.target)) {
+                    floatingMenu.classList.remove('active');
+                }
+            });
+
+            // --- Lógica para efecto 3D en tarjetas de catálogo (CORREGIDO) ---
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html> </div>
+        <div class="copyright">
+            &copy; 2025 ZhonWan Importaciones. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        // 1. Script para el contador de OFERTAS
+        // Usamos una función IIFE para evitar conflictos con variables globales.
+        (function() {
+            // Aseguramos que no haya conflictos con intervalos previos.
+            if (window.countdownInterval) clearInterval(window.countdownInterval);
+
+            window.countdownInterval = setInterval(() => {
+                const now = new Date().getTime();
+                
+                // --- CONFIGURACIÓN DE LA HORA OBJETIVO: 3:00 AM (03:00) ---
+                const targetDate = new Date();
+                // CAMBIA ESTA LÍNEA: (3 es la hora, 0 es el minuto)
+                targetDate.setHours(3, 0, 0, 0); 
+                const distance = targetDate.getTime() - now;
+
+                // Elemento DOM para el contenedor
+                const countdownEl = document.getElementById("countdown");
+
+                // 1. Finalizado
+                if (distance < 0) {
+                    clearInterval(window.countdownInterval);
+                    if (countdownEl) {
+                        countdownEl.innerHTML = 
+                            "<div style='font-size: 20px; font-weight: 800; color: var(--red); padding: 10px;'>¡OFERTA FINALIZADA!</div>";
+                    }
+                    return;
+                }
+
+                // 2. Cálculos y Display
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Actualizar HTML solo si el elemento existe
+                if (countdownEl) {
+                    document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+                    document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+                    document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+                    document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+                }
+
+            }, 1000);
+        })();
+
+        // 2. Script para el efecto de scroll (Scroll Reveal & Header Shrink)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            reveals.forEach((element, i) => {
+                var windowHeight = window.innerHeight;
+                var revealTop = element.getBoundingClientRect().top;
+                var revealPoint = 150;
+
+                if (revealTop < windowHeight - revealPoint) {
+                    // Efecto Stagger (cascada)
+                    // Usamos el data-attribute para asegurarnos que la animación solo se añade una vez
+                    if (!element.hasAttribute('data-revealed')) {
+                        let delay = element.dataset.delay || 0;
+                        setTimeout(() => {
+                            element.classList.add("active");
+                        }, delay);
+                        element.setAttribute('data-revealed', 'true');
+                    }
+                } else {
+                    // Opcional: si quieres que la animación se repita al scrollear hacia arriba
+                    // element.classList.remove("active");
+                    // element.removeAttribute('data-revealed');
+                }
+            });
+        }
+
+        window.addEventListener("scroll", reveal);
+
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector('.header');
+            header.classList.toggle('scrolled', window.scrollY > 0);
+        });
+        // Llamar a reveal al cargar la página para que se vean los primeros elementos
+        reveal();
+
+        // Asignar delays para el efecto stagger en las tarjetas
+        document.addEventListener('DOMContentLoaded', () => {
+            const dealCards = document.querySelectorAll('.grid-deals .deal-card');
+            const catalogCards = document.querySelectorAll('.grid-catalog .card');
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            function setStaggerDelay(elements, delay = 100) {
+                elements.forEach((el, index) => {
+                    el.dataset.delay = index * delay;
+                });
+            }
+            
+            setStaggerDelay(dealCards);
+            setStaggerDelay(catalogCards);
+            setStaggerDelay(faqItems, 50);
+        });
+
+    </script>
+
+    <script>
+        // 3. Script para el Menú Móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const nav = document.querySelector('.nav');
+            const navLinks = document.querySelectorAll('.nav-link, .btn-contact');
+
+            mobileToggle.addEventListener('click', function() {
+                nav.classList.toggle('active');
+                // Cambiar icono de hamburguesa a X y viceversa
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Cierra el menú al hacer clic en un enlace
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (nav.classList.contains('active')) {
+                        mobileToggle.click(); // Simula un clic para cerrar
+                    }
+                });
+            });
+        });
+
+    </script>
+
+    <script>
+        // 5. Script para el carrusel de la portada (Hero Slider)
+        document.addEventListener('DOMContentLoaded', function() {
+            const sliderContainer = document.getElementById('hero-slider');
+            if (!sliderContainer) return;
+
+            const images = [
+                'https://images.unsplash.com/photo-1581092916376-02393314af95?auto=format&fit=crop&w=1770&q=80',
+                'https://images.unsplash.com/photo-1621905251189-fc0153077430?auto=format&fit=crop&w=1770&q=80',
+                'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1770&q=80',
+                'https://images.pexels.com/photos/175039/pexels-photo-175039.jpeg?auto=format&fit=crop&w=1770&q=80'
+            ];
+
+            // Crear los divs de las diapositivas
+            images.forEach((imgUrl, index) => {
+                const slide = document.createElement('div');
+                slide.classList.add('hero-slide');
+                slide.style.backgroundImage = `url('${imgUrl}')`;
+                if (index === 0) {
+                    slide.classList.add('active');
+                }
+                sliderContainer.appendChild(slide);
+            });
+
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.hero-slide');
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000); // Cambia de imagen cada 5 segundos
+        });
+    </script>
+
+    <script>
+        // UNIFICADO: Scripts que se ejecutan al cargar el DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Lógica para el Filtro del Catálogo ---
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const catalogCards = document.querySelectorAll('.grid-catalog .card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Manejar clase activa en botones
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.dataset.filter;
+
+                    catalogCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.classList.remove('hide');
+                        } else {
+                            card.classList.add('hide');
+                        }
+                    });
+                });
+            });
+
+            // --- Lógica para el Acordeón de FAQ ---
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const answer = item.querySelector('.faq-answer');
+                    const isActive = item.classList.toggle('active');
+
+                    answer.style.maxHeight = isActive ? answer.scrollHeight + "px" : null;
+                    answer.style.padding = isActive ? "0 20px 20px" : "0 20px";
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>
